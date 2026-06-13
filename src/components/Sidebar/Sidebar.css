@@ -1,0 +1,21 @@
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.sidebar__header {
+  padding: var(--s3) var(--s3) var(--s1);
+  flex-shrink: 0;
+}
+
+.sidebar__tree {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--s1) 0 var(--s4);
+}
