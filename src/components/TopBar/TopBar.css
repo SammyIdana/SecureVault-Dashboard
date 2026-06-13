@@ -1,0 +1,117 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  height: var(--topbar-height);
+  padding: 0 var(--s4);
+  background: var(--bg-topbar);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+/* Logo */
+.topbar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-right: var(--s4);
+}
+
+.topbar__logo-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-md);
+  background: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg-primary);
+  flex-shrink: 0;
+}
+
+.topbar__logo-text {
+  font-family: var(--font-logo);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+/* Nav buttons */
+.topbar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  margin-left: auto;
+}
+
+.topbar__nav-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-sm);
+  color: var(--text-muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.topbar__nav-btn:hover {
+  background: var(--bg-surface-alt);
+  color: var(--text-primary);
+}
+
+/* Status badges */
+.topbar__status {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-left: var(--s4);
+}
+
+.topbar__badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.topbar__badge--encrypted {
+  color: var(--accent-cyan);
+  border: 1px solid var(--accent-cyan-border);
+  background: var(--accent-cyan-bg);
+}
+
+.topbar__badge--secure {
+  color: var(--success);
+  border: 1px solid var(--success-border);
+  background: var(--success-bg);
+}
+
+.topbar__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  display: inline-block;
+}
+
+/* Profile icon */
+.topbar__profile-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  margin-left: var(--s1);
+  flex-shrink: 0;
+}
