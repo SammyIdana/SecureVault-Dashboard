@@ -1,0 +1,75 @@
+.tree-node {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Row ── */
+.tree-node__row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 30px;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  color: var(--text-secondary);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  transition: background 0.1s, color 0.1s;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tree-node__row:hover {
+  background: var(--bg-surface-alt);
+  color: var(--text-primary);
+}
+
+/* Selected — purple accent, matches Figma */
+.tree-node__row--selected {
+  background: var(--accent-purple-bg);
+  border-left-color: var(--accent-purple);
+  color: var(--accent-purple-text);
+}
+
+.tree-node__row--selected:hover {
+  background: var(--accent-purple-bg);
+  color: var(--accent-purple-text);
+}
+
+/* Chevron */
+.tree-node__chevron {
+  width: 12px;
+  min-width: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+}
+
+/* Icon */
+.tree-node__icon {
+  display: flex;
+  align-items: center;
+  min-width: 16px;
+}
+
+/* Name */
+.tree-node__name {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+/* Empty badge */
+.tree-node__empty {
+  font-size: 9px;
+  color: var(--text-dim);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 1px 5px;
+  margin-right: var(--s2);
+  flex-shrink: 0;
+}
