@@ -2,13 +2,10 @@ import { useRef } from 'react'
 import { getFileColor, nodeContainsMatch } from '../../utils/fileUtils'
 import './TreeNode.css'
 
-// ============================================================
 // TreeNode — the recursive core of the file explorer.
-// Each node renders itself, then maps its children as more
-// TreeNode instances. Depth increases by 1 each level,
-// controlling the left indent. Base cases: type === 'file'
-// (no children rendered) and empty children arrays.
-// ============================================================
+// Eacch node contains more TreeNodes, which can contain more TreeNodes
+// It goes as deep as the data goes
+// Folders with no children and type === 'file' are the two base cases that stop the recursion
 
 export default function TreeNode({
   node,
@@ -25,7 +22,7 @@ export default function TreeNode({
   const isExpanded = expandedIds.has(node.id)
   const isSelected = selectedId === node.id
 
-  // Search filter: hide branch if nothing inside matches
+  // If we're searching and nothing in this branch matches, hide it entirely
   if (searchQuery && !nodeContainsMatch(node, searchQuery)) return null
 
   function handleClick(e) {
@@ -41,18 +38,21 @@ export default function TreeNode({
   function handleKeyDown(e) {
     switch (e.key) {
       case 'ArrowRight':
+        // open a closed folder
         if (isFolder && !isExpanded) {
           onToggle(node.id)
           onFolderOpen(node)
         }
         break
       case 'ArrowLeft':
+        // close an open folder
         if (isFolder && isExpanded) onToggle(node.id)
         break
       case 'Enter':
         isFolder ? (onToggle(node.id), onFolderOpen(node)) : onFileSelect(node)
         break
       case 'ArrowDown': {
+        // move focus to the next visible row
         e.preventDefault()
         const rows = [...document.querySelectorAll('.tree-node__row')]
         const i    = rows.indexOf(e.currentTarget)
@@ -60,6 +60,7 @@ export default function TreeNode({
         break
       }
       case 'ArrowUp': {
+        // move focus to the previous visible row
         e.preventDefault()
         const rows = [...document.querySelectorAll('.tree-node__row')]
         const i    = rows.indexOf(e.currentTarget)
@@ -77,7 +78,7 @@ export default function TreeNode({
       aria-expanded={isFolder ? isExpanded : undefined}
       aria-selected={isSelected}
     >
-      {/* ── Row ── */}
+      {/* Row */}
       <div
         ref={rowRef}
         className={`tree-node__row${isSelected ? ' tree-node__row--selected' : ''}`}
@@ -134,7 +135,7 @@ export default function TreeNode({
   )
 }
 
-/* ── Inline SVG icons (no external library) ── */
+/* Inline SVG icons */
 function ChevronRight() {
   return (
     <svg width="10" height="10" viewBox="0 0 24 24" fill="none"

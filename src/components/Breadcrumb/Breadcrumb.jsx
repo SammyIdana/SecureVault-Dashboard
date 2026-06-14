@@ -1,12 +1,8 @@
 import './Breadcrumb.css'
 
-// ============================================================
 // Breadcrumb — Wildcard Feature
-// Shows the full path to the current folder. Each segment
-// is clickable, letting users jump to any ancestor without
-// manually collapsing the tree. Solves a real UX gap for
-// lawyers navigating 5+ levels deep.
-// ============================================================
+// When let's say you are 5 folders deep in a legal case structure, you shouldn't have to click back through each level manually
+// Clicking any segment of the breadcrumb jumps you straight there
 
 export default function Breadcrumb({ breadcrumbs, onNavigate }) {
   return (
@@ -14,7 +10,7 @@ export default function Breadcrumb({ breadcrumbs, onNavigate }) {
 
       <VaultIcon />
 
-      {/* Root is always clickable */}
+      {/* Root is always clickable, our starting point */}
       <button
         className="breadcrumb__item breadcrumb__item--root"
         onClick={() => onNavigate(null)}
@@ -28,11 +24,14 @@ export default function Breadcrumb({ breadcrumbs, onNavigate }) {
         return (
           <span key={crumb.id} className="breadcrumb__segment">
             <span className="breadcrumb__sep">/</span>
+
+            {/* last segment is where we are, not clickable */}
             {isLast ? (
               <span className="breadcrumb__item breadcrumb__item--current">
                 {crumb.name}
               </span>
             ) : (
+              // everything else is a link back up the tree
               <button
                 className="breadcrumb__item"
                 onClick={() => onNavigate(crumb)}
