@@ -36,22 +36,30 @@ Open `http://localhost:5173` in your browser.
 
 ## Recursive Strategy
 
-The file explorer is powered by a single `TreeNode` component that calls itself.
+The file tree is built from a single component `TreeNode` that knows how 
+to render itself.
 
-Each `TreeNode` receives a `node` object from `data.json`. If the node is a folder and is expanded, it maps over `node.children` and renders a `TreeNode` for each one — passing `depth + 1` to increase the left indent. Those children do the same for their own children, and so on.
+When `TreeNode` receives a folder, it renders the folder row, then loops over 
+its children and renders a `TreeNode` for each one. Each of those children does 
+the same thing for their own children. This keeps going until there are no more 
+children left — that's when the recursion stops.
+
+The result is that the same lines of code can render a folder that is 2 
+levels deep or 20 levels deep without any changes.
 
 ```jsx
-{isFolder && isExpanded && node.children?.map(child => (
+{isFolder && isExpanded && node.children.map(child => (
   <TreeNode
     key={child.id}
     node={child}
-    depth={depth + 1}
-    // ...
+    depth={depth + 1}  // indent gets deeper each level
   />
 ))}
 ```
 
-The two base cases that stop the recursion are `type === "file"` (no children to render) and empty `children` arrays. This means the component handles 2 levels of nesting or 20 levels with identical code — no special casing for depth.
+Two things stop the recursion from going forever:
+- A node with `type === "file"` never tries to render children
+- A folder with an empty `children` array has nothing left to loop over
 
 ---
 
