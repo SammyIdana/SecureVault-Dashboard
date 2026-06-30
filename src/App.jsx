@@ -63,7 +63,6 @@ export default function App() {
   // clicking a folder name does two things: expands it in the tree
   // AND navigates the main panel into it
   const handleFolderOpen = useCallback((node) => {
-    setExpandedIds(prev => new Set([...prev, node.id]))
     setCurrentFolder(node)
     setSelectedFile(null)
   }, [])
